@@ -5,8 +5,15 @@ Our textbook is Operating System Concepts 10th edition.
 This application was created using React framework.
 ## How to use it?
 ### Hosting the application
-This is a React Application, for a live version go here #TODO_LIVE_APP_LINK
-Otherwise you can host this application on your own machine.
+#### Using the live version from github pages
+https://xtratos.github.io/Bankers-Algorithm/
+#### Deploying on a Local Machine
+##### Prerequisites
+- I created this app while using node version 15.8.0 and npm version 7.5.1, other versions will most probably work but it's not guaranteed
+##### Deployment
+1. clone the respository
+2. install node dependancies using `npm install`
+3. run the applicated using `npm run start`
 ### Using the application
 #### State Management:
 On the first page there are 2 choices to start using the app
