@@ -1,0 +1,7 @@
+html, body, #root {
+  min-height: 360px;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
