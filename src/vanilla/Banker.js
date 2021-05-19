@@ -19,8 +19,10 @@ export class Process {
 
   decrementAllocated(k) {
     let allocated = [...this.allocated];
-    allocated[k] > 0 && allocated[k]--;
-    this.allocated = [...allocated];
+    if (allocated[k] > 0) {
+      allocated[k]--;
+      this.allocated = [...allocated];
+    }
   }
 
   incrementMax(k) {
@@ -31,8 +33,10 @@ export class Process {
 
   decrementMax(k) {
     let max = [...this.max];
-    max[k] > 0 && max[k]--;
-    this.max = [...max];
+    if (max[k] > 0) {
+      max[k]--;
+      this.max = [...max];
+    }
   }
   
   copy() {
@@ -139,8 +143,8 @@ export class Banker {
     // Check for system safety after commiting the request
     let safeResult = this.safe();
 
-    let indexOfRequestingProcess = safeResult[1].indexOf(proccesIndex);
-    safeResult[1][indexOfRequestingProcess] = [safeResult[1][indexOfRequestingProcess], 'req'];
+    // Append the request to the start of the safe result
+    safeResult[1] = [`${proccesIndex}req` ,...safeResult[1]];
 
     // Restore original state
     temporaryVector.forEach((item, index) => {
