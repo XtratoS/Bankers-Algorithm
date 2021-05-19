@@ -12,7 +12,7 @@ import SaveStateModal from './components/SaveStateModal';
 
 function App() {
 
-  const [resourceCount, setResourceCount] = useState(null);
+  const [resourceCount, setResourceCount] = useState('');
 
   const [banker, setBanker] = useState(null);
   const [processes, setProcesses] = useState([]);
@@ -59,55 +59,54 @@ function App() {
 
   if (banker === null) {
     return (
-      <div className="row my-4">
-        <div className="col">
-          <div className = "text-center">
-            <div className = "row my-4 text-center">
-              <div className = "col-6 m-auto">
-                <label className="form-label fs-4 mb-4">
-                  Enter the number of resources
-                </label>
-                <input
-                  className = "form-control fs-5"
-                  onChange = {(event) => {
-                    setResourceCount(event.target.value);
-                  }}
-                  placeholder = "Resources"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <button className="btn btn-primary fs-5" onClick={() => {
-                  if (resourceCount && parseInt(resourceCount) && resourceCount > 0) {
-                    let newBanker = new Banker(resourceCount);
-                    setBanker(newBanker);
-                  }
-                }}>Submit</button>
-              </div>
+      <div className="container">
+        <div className="row my-4">
+          <div className="col row">
+            <div className="col-9 m-auto text-center">
+              <label className="form-label fs-4 mb-4">
+                Enter the number of resources
+              </label>
+              <input
+                className = "form-control fs-5 mb-4"
+                onChange = {(event) => {
+                  setResourceCount(event.target.value);
+                }}
+                placeholder = "Resources"
+              />
+              <button
+                className = "btn btn-primary fs-5"
+                disabled = {resourceCount === ''}
+                onClick = {() => {
+                if (resourceCount && parseInt(resourceCount) !== NaN && resourceCount > 0) {
+                  let newBanker = new Banker(resourceCount);
+                  setBanker(newBanker);
+                }
+              }}>Submit</button>
             </div>
           </div>
-        </div>
-        <div className="col-1">Or</div>
-        <div className="col">
-          <div className = "row my-4 text-center">
-            <div className = "col-6 m-auto">
+          <div className="col-1 d-flex justify-content-center align-items-center">
+            OR
+          </div>
+          <div className="col row">
+            <div className="col-9 m-auto text-center">
               <label className="form-label fs-4 mb-4">
-                Enter a state
+                Enter a state string
               </label>
               <textarea
+                className = "form-control fs-5 mb-4"
                 value = {textAreaContent}
                 onChange = {(event) => {setTextAreaContent(event.target.value)}}
               />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col text-center">
-              <button className="btn btn-primary fs-5" onClick={() => {
-                if (textAreaContent !== null) {
-                  setBanker(Banker.fromString(textAreaContent));
-                }
-              }}>Enter State</button>
+              <button className="btn btn-primary fs-5"
+                disabled={textAreaContent === ''}
+                onClick={() => {
+                  if (textAreaContent !== '') {
+                    setBanker(Banker.fromString(textAreaContent));
+                  }
+                }}
+              >
+                Enter State
+              </button>
             </div>
           </div>
         </div>
@@ -127,14 +126,15 @@ function App() {
         modalOpen = {saveStateModalOpen}
         toggleModal = {toggleSaveStateModal}
       />
+      <button className="btn btn-secondary fs-5 me-2 mb-2" onClick={addProcess}>Add Process</button>
+      <button className="btn btn-primary fs-5 me-2 mb-2" onClick={showNeedMatrix}>Show Need Matrix</button>
+      <button className="btn btn-primary fs-5 me-2 mb-2" onClick={checkSafeState}>Check System Safety</button>
+      <button className="btn btn-warning fs-5 me-2 mb-2" onClick={() => {toggleModal()}}>Check Request Safety</button>
       <button className="btn btn-success fs-5 me-2 mb-2" onClick={() => {
         setCurrentStateString(banker.encode());
         toggleSaveStateModal();
       }}>Save State</button>
-      <button className="btn btn-secondary fs-5 me-2 mb-2" onClick={addProcess}>Add Process</button>
-      <button className="btn btn-primary fs-5 me-2 mb-2" onClick={showNeedMatrix}>Evaluate Need Matrix</button>
-      <button className="btn btn-primary fs-5 me-2 mb-2" onClick={checkSafeState}>Check System Safety</button>
-      <button className="btn btn-warning fs-5 me-2 mb-2" onClick={() => {toggleModal()}}>Check Request Safety</button>
+      <button className="btn btn-dark fs-5 me-2 mb-2" onClick={() => {window.location.reload()}}>Reset</button>
       <Header
         hideNeedMatrix = {hideNeedMatrix}
         banker = {banker}
