@@ -24,7 +24,7 @@ export default function RequestAdditionalResourcesModal(props) {
     }
 
     let result = props.banker.requestAdditionalResources(selectedProcess, requestedResources);
-    alert(requestPrinterHelper(result));
+    props.showResult(requestPrinterHelper(result));
     props.toggleModal();
   }
 

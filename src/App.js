@@ -134,6 +134,10 @@ function App() {
       <RequestAdditionalResourcesModal
         banker = {banker}
         modalOpen = {modalOpen}
+        showResult = {(text) => {
+          setResultText(text);
+          toggleTextModal();
+        }}
         toggleModal = {toggleModal}
       />
       <SaveStateModal

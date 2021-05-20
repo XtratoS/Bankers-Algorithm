@@ -51,7 +51,8 @@ export class Process {
   willItRunUsingResources(availableVector) {
     let needVector = this.need();
     for (let i=0; i < availableVector.length; i++) {
-      if (needVector[i] > availableVector[i]) {
+      let a = availableVector[i];
+      if (needVector[i] > a || a < 0) {
         return false;
       }
     }
@@ -117,6 +118,7 @@ export class Banker {
   }
   
   requestAdditionalResources(proccesIndex, inputResourceVector) {
+    console.log(proccesIndex, inputResourceVector);
     // Temporary vector to store original state
     let temporaryVector = [];
     let resourceVector = [...inputResourceVector];
@@ -136,8 +138,8 @@ export class Banker {
         return (value - resourceVector[index]);
       });
     } catch (error) {
-    	console.error('Invalid Index Provided to requestAdditionalResources');
-      return;
+    	console.error('Invalid index provided to requestAdditionalResources');
+      throw new Error('Invalid index provided to requestAdditionalResources');
     }
 
     // Check for system safety after commiting the request
