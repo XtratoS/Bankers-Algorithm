@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './bootstrap.css';
+
 import Header from './components/Header';
 import Row from './components/Row';
 import NeedMatrixRow from './components/NeedMatrixRow';
@@ -9,18 +10,22 @@ import { Banker, Process } from './vanilla/Banker';
 import { safePrinterHelper } from './helpers';
 import RequestAdditionalResourcesModal from './components/RequestAdditionalResourcesModal';
 import SaveStateModal from './components/SaveStateModal';
+import TextModal from './components/TextModal';
 
 function App() {
 
-  const [resourceCount, setResourceCount] = useState('');
-
   const [banker, setBanker] = useState(null);
+  const [resourceCount, setResourceCount] = useState('');
+  
   const [processes, setProcesses] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [textAreaContent, setTextAreaContent] = useState('');
 
-  const [currentStateString, setCurrentStateString] = useState('');
   const [saveStateModalOpen, setSaveStateModalOpen] = useState(false);
+  const [currentStateString, setCurrentStateString] = useState('');
+
+  const [textModalOpen, setTextModalOpen] = useState(false);
+  const [resultText, setResultText] = useState('');
 
   useEffect(() => {
     banker && banker.processes && setProcesses(banker.processes);
@@ -32,6 +37,10 @@ function App() {
 
   const toggleSaveStateModal = () => {
     setSaveStateModalOpen(!saveStateModalOpen);
+  }
+
+  const toggleTextModal = () => {
+    setTextModalOpen(!textModalOpen);
   }
 
   const [need, setNeed] = useState(null);
@@ -52,7 +61,8 @@ function App() {
 
   const checkSafeState = () => {
     let result = banker.safe();
-    alert(safePrinterHelper(result));
+    setResultText(safePrinterHelper(result));
+    toggleTextModal();
   }
 
   let k = 0;
@@ -77,7 +87,7 @@ function App() {
                 className = "btn btn-primary fs-5"
                 disabled = {resourceCount === ''}
                 onClick = {() => {
-                if (resourceCount && parseInt(resourceCount) !== NaN && resourceCount > 0) {
+                if (resourceCount && !isNaN(parseInt(resourceCount)) && resourceCount > 0) {
                   let newBanker = new Banker(resourceCount);
                   setBanker(newBanker);
                 }
@@ -116,6 +126,11 @@ function App() {
   
   return (
     <div className="container my-4 py-4 fs-5">
+      <TextModal
+        text = {resultText}
+        modalOpen = {textModalOpen}
+        toggleModal = {toggleTextModal}
+      />
       <RequestAdditionalResourcesModal
         banker = {banker}
         modalOpen = {modalOpen}

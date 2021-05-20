@@ -29,7 +29,7 @@ function Header(props) {
       <div className="row text-center border-bottom border-dark">
         {props.banker.available.map((e, i) => (
           <div key={i} className="col">
-            {String.fromCharCode('A'.charCodeAt(0) + i)}
+            <b>{String.fromCharCode('A'.charCodeAt(0) + i)}</b>
           </div>
         ))}
       </div>
@@ -64,14 +64,14 @@ function Header(props) {
       <div className="row col text-center border border-top-0 border-dark m-0 p-1 justify-content-around">
         {props.banker.available.map((e, i) => (
           <div key={i} className="col">
-            {String.fromCharCode('A'.charCodeAt(0) + i)}
+            <b>{String.fromCharCode('A'.charCodeAt(0) + i)}</b>
           </div>
         ))}
       </div>
       <div className="row col text-center border border-top-0 border-dark m-0 p-1 justify-content-around">
         {props.banker.available.map((e, i) => (
           <div key={i} className="col">
-            {String.fromCharCode('A'.charCodeAt(0) + i)}
+            <b>{String.fromCharCode('A'.charCodeAt(0) + i)}</b>
           </div>
         ))}
       </div>
