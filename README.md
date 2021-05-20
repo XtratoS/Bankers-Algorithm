@@ -9,13 +9,13 @@ This application was created using React framework.
 https://xtratos.github.io/Bankers-Algorithm/
 #### Deploying on a Local Machine
 ##### Prerequisites
-- I created this app while using node version 15.8.0 and npm version 7.5.1, other versions will most probably work but it's not guaranteed
+- I created this app while using node version 15.8.0 and npm version 7.5.1, other versions will most probably work but it's not guaranteed.
 ##### Deployment
 1. clone the respository
 2. install node dependancies using `npm install`
 3. run the applicated using `npm run start`
 ### Using the application
-#### State Management:
+#### State Management
 On the first page there are 2 choices to start using the app
 1. To start a brand new state by specifying the number of resources in the system.
 2. By using a pre-saved state to restore it and use it.
