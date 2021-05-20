@@ -15,7 +15,7 @@ export default function NeedMatrixHeader(props) {
         <div className="row text-center p-1">
           {props.banker.available.map((value, index) => (
             <div key={index} className="col">
-              {String.fromCharCode('A'.charCodeAt(0) + index)}
+              <b>{String.fromCharCode('A'.charCodeAt(0) + index)}</b>
             </div>
           ))}
         </div>
