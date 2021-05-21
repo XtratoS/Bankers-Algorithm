@@ -33,6 +33,19 @@ On the first page there are 2 choices to start using the app
   - Provides a string which represents the current state of the system, this string can be used later to restore the current system state.
 - Reset:
   - Ditches the current state and resets the website to the initial state.
+### Reading the output
+The output is always shown in a modal, the possible outcomes  are
+#### When checking system safety
+- **Yes, Safe state** <seq>  
+When the system is in a safe state
+- **No**  
+  When the system is not in safe state
+#### When making a Request
+- **Yes, the request can be granted with safe state, Safe state <seq>**  
+   When the request can be granted
+- **No**  
+  When the request can't be granted
+seq is a sequence of operations which guarantees system safety, example for a sequence: ``<P0, P3, P2, P4, P1>``
 ### Additional Features to the original specification
 - Interactive UI.
 - Ability to save and restore states using a state string.
