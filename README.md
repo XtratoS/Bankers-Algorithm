@@ -45,7 +45,8 @@ When the system is in a safe state
    When the request can be granted
 - **No**  
   When the request can't be granted
-seq is a sequence of operations which guarantees system safety, example for a sequence: ``<P0, P3, P2, P4, P1>``
+seq is a sequence of operations which guarantees system safety, example for a sequence  
+``<P0, P3, P2, P4, P1>``
 ### Additional Features to the original specification
 - Interactive UI.
 - Ability to save and restore states using a state string.
